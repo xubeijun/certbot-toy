@@ -1,4 +1,4 @@
-# certbot_toy
+# certbot-toy
 Offer efficiently command to manage letsencrypt SSL wildcard certificates base on docker compose.
 
 基于docker compose提供高效的命令去管理letsencrypt的SSL通配符证书。
