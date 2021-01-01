@@ -77,7 +77,7 @@ cd ./certbot-toy/scripts && chmod +x ./certbot_main.sh
 
 定时执行续期证书（15天）
 ```cmd
-crontab -e
+#crontab -e
 
-# 0 0 */15 * * /home/{your director}/certbot-toy/scripts/certbot_main.sh renew -n example.com >> /home/{your director}/certbot-toy/docker-env/log/letsencrypt/cron.log 2>&1
+0 0 */15 * * /home/{your director}/certbot-toy/scripts/certbot_main.sh renew -n example.com >> /home/{your director}/certbot-toy/docker-env/log/letsencrypt/cron.log 2>&1
 ```
