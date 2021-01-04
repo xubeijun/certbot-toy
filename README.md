@@ -81,3 +81,6 @@ cd ./certbot-toy/scripts && chmod +x ./certbot_main.sh
 
 0 0 */15 * * /home/{your director}/certbot-toy/scripts/certbot_main.sh renew -n example.com >> /home/{your director}/certbot-toy/docker-env/log/letsencrypt/cron.log 2>&1
 ```
+
+## 立即开始——只需要6步
+关注同名微博、公众号「续杯君」，获得更多资讯。回复关键词——SSL证书，立刻获得certbot视频专栏。
