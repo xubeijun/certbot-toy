@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ../docs/error.sh
+source ${APP_DIR}docs/error.sh
+
+error "requireDnsParams"
 
 if [[ -z ${ACCESS_KEY_ID+x} || -z ${ACCESS_KEY_SECRET+x} || -z ${ENDPOINT+x} ]]
     then
@@ -17,10 +19,10 @@ RR="_acme-challenge"
 
 # 调用DNS插件
 function callDnsPlugin(){
-    RES=$(${APP_DIR}${DNS_PLUGIN}-dns -action create -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -domainName $DOMAIN -rr $RR -value $CERTBOT_VALIDATION)
+    RES=$(${APP_DIR}bin/${DNS_PLUGIN}-dns -action create -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -domainName $DOMAIN -rr $RR -value $CERTBOT_VALIDATION)
     STATUS=$(echo $RES | cut -d ":" -f 1)
 
-    if [ $STATUS == "ok" ]; then
+    if [ $STATUS = "ok" ]; then
         RECORD_ID=$(echo $RES | cut -d ":" -f 2)
         echo $RECORD_ID > /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN
         sleep ${REFRESH_SLEEP:="25"}
@@ -31,7 +33,8 @@ function callDnsPlugin(){
 
 case "$DNS_PLUGIN" in
     "aliyun")
-        callDnsPlugin $@; break ;;
+        callDnsPlugin $@
+        ;;
     *)
         echo "Unexpected param: $DNS_PLUGIN - this should not define."
         help ;;

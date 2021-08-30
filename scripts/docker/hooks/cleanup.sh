@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../docs/error.sh
+source ${APP_DIR}docs/error.sh
 
 if [[ -z ${ACCESS_KEY_ID+x} || -z ${ACCESS_KEY_SECRET+x} || -z ${ENDPOINT+x} ]]
     then
@@ -21,10 +21,10 @@ function callDnsPlugin(){
         error "requireDnsPlugin"
     fi
 
-    RES=$(${APP_DIR}${DNS_PLUGIN}-dns -action delete -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -recordId $RECORD_ID)
+    RES=$(${APP_DIR}bin/${DNS_PLUGIN}-dns -action delete -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -recordId $RECORD_ID)
     STATUS=$(echo $RES | cut -d ":" -f 1)
 
-    if [ $STATUS == "ok" ]; then
+    if [ $STATUS = "ok" ]; then
         rm -f /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN
         rm -f /tmp/DNS_PLUGIN
     else
@@ -34,7 +34,8 @@ function callDnsPlugin(){
 
 case "$DNS_PLUGIN" in
     "aliyun")
-        callDnsPlugin $@; break ;;
+        callDnsPlugin $@
+        ;;
     *)
         echo "Unexpected param: $DNS_PLUGIN - this should not define."
         help ;;
