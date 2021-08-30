@@ -1,4 +1,4 @@
-[English](README-CN.md) | 简体中文
+[English](README.md) | 简体中文
 
 
 <h1 align="center">certbot-toy</h1>
