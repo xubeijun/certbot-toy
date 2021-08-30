@@ -15,12 +15,12 @@ Unofficial build of EFF's Certbot with its plugin for doing DNS challenges using
 
 Method 1: Use a password-protected SSH key.
 ```sh
-$ git clone git@github.com:xubeijun/certbot-toy.git
+git clone git@github.com:xubeijun/certbot-toy.git
 ```
 
 Method 2: Use Git or checkout with SVN using the web URL.
 ```sh
-$ git clone https://github.com/xubeijun/certbot-toy.git
+git clone https://github.com/xubeijun/certbot-toy.git
 ```
 
 ## Config

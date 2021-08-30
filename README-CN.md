@@ -15,12 +15,12 @@
 
 方式 1: 使用受密码保护的SSH密钥。
 ```sh
-$ git clone git@github.com:xubeijun/certbot-toy.git
+git clone git@github.com:xubeijun/certbot-toy.git
 ```
 
 方式 2: 通过网络URL使用Git下载。
 ```sh
-$ git clone https://github.com/xubeijun/certbot-toy.git
+git clone https://github.com/xubeijun/certbot-toy.git
 ```
 
 ## 配置
