@@ -7,18 +7,18 @@ if [[ -z ${ACCESS_KEY_ID+x} || -z ${ACCESS_KEY_SECRET+x} || -z ${ENDPOINT+x} ]]
     error "requireDnsParams"
 fi
 
+if [ -f /tmp/DNS_PLUGIN ]; then
+    DNS_PLUGIN=$(cat /tmp/DNS_PLUGIN)
+else
+    error "requireDnsPlugin"
+fi
+
 # 调用DNS插件
 function callDnsPlugin(){
     if [ -f /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN ]; then
         RECORD_ID=$(cat /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN)
     else
         error "requireDnsRecordId"
-    fi
-
-    if [ -f /tmp/DNS_PLUGIN ]; then
-        DNS_PLUGIN=$(cat /tmp/DNS_PLUGIN)
-    else
-        error "requireDnsPlugin"
     fi
 
     RES=$(${APP_DIR}bin/${DNS_PLUGIN}-dns -action delete -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -recordId $RECORD_ID)
