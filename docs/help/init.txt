@@ -1,0 +1,12 @@
+usage: bash main.sh init
+
+Init command load third party dns-plugins,
+include aliyun Cloud DNS.
+
+The MACHINE_GOOS, MACHINE_GOARCH variables is config in the ${your_path}/certbot-toy/scripts/dns-plugins/init-config.sh file.
+You can use the go env command to view the values of these variables on your machine.
+
+When go get models operation prompt timed out, your client need to config proxy.
+Actually we have offered the go build binary file in the ${your_path}/certbot-toy/scripts/docker/bin/ directory, you can skip the init step.
+
+Use "bash main.sh help <command>" for more information about that command.

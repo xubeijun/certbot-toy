@@ -1,0 +1,32 @@
+usage: certbot-toy manage [-a|--action mode] [-d|--domain output] [-p|--plugin dns] [-c|--certs] [-l|--list]
+
+Manage command manage certbot certificates, these are common certbot-toy commands used in various situations.
+
+OPTIONS
+
+    -a, --action
+        This flag is operating certbot certificates, maybe require using -d flag to special certbot certificates name,
+        or -p falg to special third part dns plugin.
+        The mode see below:
+            certonly
+                Re-creating and updating existing certificates, it need -d flag and -p flag.
+            renew
+                Force-renewal existing certificates.
+            revoke
+                Revoke certificates, it need -d flag.
+            delete
+                Delete certificates, it need -d flag.
+    -c, --certs
+        print the certificates which certbot knows about.
+    -l, --list
+        Lists of the valid domain which is defined in user-config.sh file.
+    -d, --domain
+        Set certbot certificates name, as certbot --cert-name param, it will ganarate the named output file.
+        Output must be defined in variable "valid_domain", which is defined in certs-config.sh file.
+        The -d flag is used in -a flag.
+    -p, --plugin
+        Set third part dns plugin, the dns see below:
+            aliyun
+                the aliyun dns plugin.
+
+Use "certbot-toy help <command>" for more information about that command.

@@ -1,0 +1,25 @@
+usage: bash main.sh run
+
+This command is to run the docker images, the certbot-toy is integrated EFF's Certbot with third party dns plugins.
+
+First, you need to config the user.env which is locate in ${your_path}/certbot-toy/scripts/docker/config/ director.
+
+The LETSENCRYPT_CONF_DIR variable is volume directory which is mounted to /etc/letsencrypt in docker directory.
+The LETSENCRYPT_WORK_DIR variable is volume directory which is mounted to /var/lib/letsencrypt in docker directory.
+The LETSENCRYPT_LOG_DIR variable is volume directory which is mounted to /var/log/letsencrypt in docker directory.
+
+The LETSENCRYPT_CONF_DIR, LETSENCRYPT_WORK_DIR, LETSENCRYPT_LOG_DIR is absolute path in your system.
+
+Second, you need to config the user.env which is locate in ${your_path}/certbot-toy/scripts/docker/config/ director.
+
+The USER_CONFIG_DIR variable is volume directory which is mounted to ${APP_DIR}/config/ in docker directory.
+
+The USER_CONFIG_DIR is absolute path in your system.
+
+Third, you need to config the user.env which is locate in ${your_path}/certbot-toy/scripts/docker/config/ director.
+
+The ACCESS_KEY_ID variable is used in your third part dns plugin sdk, such as aliyun.
+The ACCESS_KEY_SECRET variable is used in your third part dns plugin sdk, such as aliyun.
+The ENDPOINT variable is used in your third part dns plugin sdk, such as aliyun.
+
+Use "bash main.sh help <command>" for more information about that command.

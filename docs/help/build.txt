@@ -1,0 +1,5 @@
+usage: bash main.sh build
+
+This command is to build docker images, the certbot-toy is integrated EFF's Certbot with third party dns plugins.
+
+Use "bash main.sh help <command>" for more information about that command.

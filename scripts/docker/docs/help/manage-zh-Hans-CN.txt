@@ -1,0 +1,31 @@
+用法说明: certbot-toy manage [-a|--action mode] [-d|--domain output] [-p|--plugin dns] [-c|--certs] [-l|--list]
+
+Manage命令管理certbot证书，这些certbot-toy的命令用于处理常见的各种情况。
+
+选项
+
+    -a, --action
+        这个标签用来操作certbot证书，可能需要配合使用-d标签来指定certbot证书名称，或者-p标签指定第三方dns插件。
+        模式如下所示：
+            certonly
+                重新创建和更新现有证书，它需要-d标签和-p标签来配合使用。
+            renew
+                强制更新现有证书。
+            revoke
+                撤销证书，它需要-d标签配合使用。
+            delete
+                删除证书，它需要-d标签配合使用。
+    -c, --certs
+        打印certbot生成的证书。
+    -l, --list
+        列出有效的域名，其在user-config.sh文件中定义。
+    -d, --domain
+        Set certbot certificates name, as certbot --cert-name param, it will ganarate the named output file.
+        Output must be defined in variable "valid_domain", which is defined in certs-config.sh file.
+        The -d flag is used in -a flag.
+    -p, --plugin
+        设置第三方dns插件，可选dns插件如下所示：
+            aliyun
+                阿里云dns插件
+
+使用 "certbot-toy help <command>" 获取更多命令使用的信息。

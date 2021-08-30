@@ -1,86 +1,179 @@
-# certbot-toy
-Offer efficiently command to manage letsencrypt SSL wildcard certificates base on docker compose.
+English | [简体中文](README-CN.md)
 
-基于docker compose提供高效的命令去管理letsencrypt的SSL通配符证书。
 
-### 目录结构
-Director  | Feauture
+<h1 align="center">certbot-toy</h1>
+The purpose of this program is to generate certbot-toy which is a docker images for managing Certbot certificates.
+Unofficial build of EFF's Certbot with its plugin for doing DNS challenges using aliyun Cloud DNS.
+
+## Requirements
+
+- Go 1.14.x or later.
+- GNU bash 5.1.x or later.
+- Docker 18.09.x or later.
+
+## Installation
+
+Method 1: Use a password-protected SSH key.
+```sh
+$ git clone git@github.com:xubeijun/certbot-toy.git
+```
+
+Method 2: Use Git or checkout with SVN using the web URL.
+```sh
+$ git clone https://github.com/xubeijun/certbot-toy.git
+```
+
+## Config
+
+File: **init-config.sh**
+
+Path: `${your_path}/certbot-toy/scripts/dns-plugins/init-config.sh`
+
+Descript: Go build third party dns-plugins need these parameters.
+
+Parameter  | Feauture
 --      | ----------
- docker-env   | docker compose配置
- scripts | certbot脚本
+ MACHINE_GOOS   | go env command to view the values of GOOS on your machine
+ MACHINE_GOARCH | go env command to view the values of GOARCH on your machine
 
-### 配置文件
-Director  | Feauture
+
+File: **user.env**
+
+Path: `${your_path}/certbot-toy/scripts/docker/config/user.env`
+
+Descript: Run certbot-toy of the docker image need these envionment variables.
+
+Parameter  | Feauture
 --      | ----------
- docker-env/.env   | docker配置文件
- scripts/certbot_config.sh | certbot配置文件
+ USER_CONFIG_DIR   | it is absolute path and mounted to `${APP_DIR}config/` in docker directory.
+ LETSENCRYPT_CONF_DIR   | it is absolute path and mounted to `/etc/letsencrypt` in docker directory.
+ LETSENCRYPT_WORK_DIR   | it is absolute path and mounted to `/var/lib/letsencrypt` in docker directory.
+ LETSENCRYPT_LOG_DIR   | it is absolute path and mounted to `/var/log/letsencrypt` in docker directory.
+ ACCESS_KEY_ID   | it is used in your third part dns plugin sdk and get it from your clound service.
+ ACCESS_KEY_SECRET   | it is used in your third part dns plugin sdk and get it from your clound service.
+ ENDPOINT   | it is used in your third part dns plugin sdk and get it from your clound service.
 
-### 获取帮助信息
-获取用例信息
+File: **user-config.sh**
 
-```cmd
-cd ./certbot-toy/scripts && ./certbot_main.sh -h
+Path: `${your_path}/certbot-toy/scripts/docker/config/user-config.sh`
+
+Descript: Format as valild_domain["CERT_NAME"]="DOMAIN", that means `certbot --cert-name ${CERT_NAME} -d ${DOMAIN}`.
+
+Parameter  | Feauture
+--      | ----------
+ valid_domain   | For example, `valild_domain["example.com"]="*.example.com"`.
+
+ ---
+
+## Usage
+
+Get more information about this script and learn its command.
+
+```sh
+cd ${your_path}/certbot-toy/
+bash main.sh help
 ```
 
-## 立即开始——只需要6步
-请根据自身实际情况，修改docker yml配置文件，及certbot配置文件。
+## Quick Examples
 
-### step1
-填写“docker配置文件”中的变量
-「MYSQL_ROOT_PASSWORD、MYSQL_USER_NAME、MYSQL_USER_PASSWORD、REDIS_PASS_WORD」
+Please select the corresponding step according to your actual situation.
 
-允许docker compose命令如代码示例。“需要您的服务器已安装好docker和docker compose。”
+### step 1 - init third party dns-plugins
+This command is to init third party dns-plugins, it include aliyun Cloud DNS.
 
-```cmd
-cd ./certbot-toy/docker-env && docker-compose up -d
+Don't forget to complete the configuration `init-config.sh` file, **we need these envionment variables**.
+
+Actually we have offered the go build binary file in the `${your_path}/certbot-toy/scripts/docker/bin/` directory, **you can skip the init step**.
+
+```sh
+bash main.sh init
 ```
 
-### step2
-生成 迪菲-赫尔曼密钥交换
+### step 2 - build certbot-toy docker image
+This command is to build docker images, the certbot-toy is integrated EFF's Certbot with third party dns plugins.
 
-```
-cd ./certbot-toy/docker-env && openssl dhparam -out ./conf/nginx/certs/dhparam-2048.pem 2048
-```
-
-### step3
-填写“certbot配置文件”的变量
-「certbot_email、cert_domain_map」
-
-新建通配符证书
-
-```cmd
-cd ./certbot-toy/scripts && ./certbot_main.sh certonly -n example.com
+```sh
+bash main.sh build
 ```
 
-### step4
-当提示配置对应域名的TXT记录时，请在域名供应商后台，新增TXT记录，并填写对应的标识码
+Below command help you to view this docker image which is named **certbot-toy**.
+```sh
+docker images
 
-验证TXT记录的DNS是否生效（macOS系统）
-```cmd
-dig TXT _acme-challenge.example.com
 ```
 
-### step5
-按提示确定生成证书
+### step 3 - run certbot-toy docker image
+This command is to run the docker images which is named certbot-toy.
 
-查看live证书
-```
-cd ./certbot-toy/scripts && ./certbot_main.sh list-cert-live
-```
+Don't forget to complete the configuration `user.env` file, **we need these envionment variables**.
 
-### step6
-
-如果缺失执行权限，请执行以下命令进行授权
-```cmd
-cd ./certbot-toy/scripts && chmod +x ./certbot_main.sh
+```sh
+bash main.sh run
 ```
 
-定时执行续期证书（15天）
-```cmd
-#crontab -e
+Below command help you to view this docker container which is named **certbot**.
+```sh
+docker container ls -a
 
-0 0 */15 * * /home/{your director}/certbot-toy/scripts/certbot_main.sh renew -n example.com >> /home/{your director}/certbot-toy/docker-env/log/letsencrypt/cron.log 2>&1
 ```
 
-## 立即开始——只需要6步
-关注同名微博、公众号「续杯君」，获得更多资讯。回复关键词——SSL证书，立刻获得certbot视频专栏。
+### setp 4 - exec certbot-toy docker container
+
+This command is to exec the docker container which is named certbot-toy, you will see the usage.
+
+Don't forget to complete the configuration `user-config.sh` file, **we need these envionment variables**.
+
+```sh
+docker exec -it certbot certbot-toy -h
+```
+
+---
+
+## Congratulations
+
+Have a fun experience with certbot-toy.
+
+e.g. View more [certbot-toy usage](./scripts/docker/docs/help/manage.txt)
+
+```sh
+docker exec -it certbot certbot-toy -h
+```
+
+e.g. print the certificates which certbot knows about.
+
+```sh
+docker exec -it certbot certbot-toy manage -c
+```
+
+e.g. Lists of the valid domain which is defined in user-config.sh file.
+
+```sh
+docker exec -it certbot certbot-toy manage -l
+```
+
+e.g. Re-creating and updating existing certificates
+
+```sh
+docker exec -it certbot certbot-toy manage -a certonly -d example.com -p aliyun
+```
+
+e.g. Force-renewal existing certificates
+
+```sh
+docker exec -it certbot certbot-toy manage -a renew
+```
+
+e.g. Revoke certificates
+
+```sh
+docker exec -it certbot certbot-toy manage -a revoke -d example.com
+```
+
+e.g. Delete certificates
+
+```sh
+docker exec -it certbot certbot-toy manage -a delete -d example.com
+```
+
+## Follow me
+Follow my Weibo, WeChat Official Account **续杯君** for more information.
