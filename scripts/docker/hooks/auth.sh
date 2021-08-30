@@ -2,8 +2,6 @@
 
 source ${APP_DIR}docs/error.sh
 
-error "requireDnsParams"
-
 if [[ -z ${ACCESS_KEY_ID+x} || -z ${ACCESS_KEY_SECRET+x} || -z ${ENDPOINT+x} ]]
     then
     error "requireDnsParams"
