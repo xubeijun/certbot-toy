@@ -94,8 +94,8 @@ func main() {
     switch action {
     case "create":
         response, _err := _addDomainRecord(client, rr, value, domainName)
-        recordId = tea.StringValue(response.Body.RecordId)
         tryError(_err)
+        recordId = tea.StringValue(response.Body.RecordId)
     default:
         _, _err := _deleteDomainRecord(client, recordId)
         tryError(_err)
