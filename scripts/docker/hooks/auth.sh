@@ -17,7 +17,7 @@ RR="_acme-challenge"
 
 # 调用DNS插件
 function callDnsPlugin(){
-    RES=$(${APP_DIR}bin/${DNS_PLUGIN}-dns -action create -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -domainName $DOMAIN -rr $RR -value $CERTBOT_VALIDATION)
+    RES=$(${APP_DIR}bin/${DNS_PLUGIN}-dns -action create -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -domainName $CERTBOT_DOMAIN -rr $RR -value $CERTBOT_VALIDATION)
     STATUS=$(echo $RES | cut -d ":" -f 1)
 
     if [ $STATUS = "ok" ]; then

@@ -49,9 +49,9 @@ Parameter  | Feauture
  LETSENCRYPT_CONF_DIR   | it is absolute path and mounted to `/etc/letsencrypt` in docker directory.
  LETSENCRYPT_WORK_DIR   | it is absolute path and mounted to `/var/lib/letsencrypt` in docker directory.
  LETSENCRYPT_LOG_DIR   | it is absolute path and mounted to `/var/log/letsencrypt` in docker directory.
- ACCESS_KEY_ID   | it is used in your third part dns plugin sdk and get it from your clound service.
- ACCESS_KEY_SECRET   | it is used in your third part dns plugin sdk and get it from your clound service.
- ENDPOINT   | it is used in your third part dns plugin sdk and get it from your clound service.
+ ACCESS_KEY_ID   | it is the Cloudflare api key id and used in your third part dns plugin sdk and get it from your clound service.
+ ACCESS_KEY_SECRET   | it is the Cloudflare api key secret and used in your third part dns plugin sdk and get it from your clound service.
+ ENDPOINT   | it is the Cloudflare zone id and used in your third part dns plugin sdk and get it from your clound service.
 
 File: **user-config.sh**
 
