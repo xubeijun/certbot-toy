@@ -57,22 +57,13 @@ git clone https://github.com/xubeijun/certbot-toy.git
 
 路径: `${your_path}/certbot-toy/scripts/docker/config/user-config.sh`
 
-描述: Format as valild_domain["CERT_NAME"]="DOMAIN", that means `certbot --cert-name ${CERT_NAME} -d ${DOMAIN}`.
+描述: 格式如`valild_domain["CERT_NAME"]="DOMAIN"`，指向`certbot --cert-name ${CERT_NAME} -d ${DOMAIN}`。valild_domain是数组，您可在此处定义需要获取证书的域名列表。
 
 参数  | 功能
 --      | ----------
- valid_domain   | For example, `valild_domain["example.com"]="*.example.com"`.
+ valid_domain   | 示例： `valild_domain["example-a.com"]="*.example-a.com"` `valild_domain["example-b.com"]="*.example-b.com"`
 
  ---
-
-## 用例
-
-获取该脚本更多信息及学习它的命令。
-
-```sh
-cd ${your_path}/certbot-toy/
-bash main.sh help
-```
 
 ## 快速开始
 
@@ -122,9 +113,11 @@ docker container ls -a
 
 ### 步奏 4 - 执行certbot-toy镜像的容器服务
 
-该命令执行certbot-toy镜像的容器服务，您将会看到它的用法说明。
-
 不要忘记完成配置`user-config.sh`文件, **我们需要这些环境变量**.
+
+恭喜您，至此可以使用certbot-toy容器来高效管理Certbot证书！
+
+执行该命令将获取certbot-toy的用法说明。
 
 ```sh
 docker exec -it certbot certbot-toy -h
@@ -132,51 +125,15 @@ docker exec -it certbot certbot-toy -h
 
 ---
 
-## 恭喜
+
+## 使用示例
 
 祝您使用certbot-toy时能有一个有趣的体验。
 
-e.g. 查看更多 [certbot-toy 用法说明](./scripts/docker/docs/help/manage-zh-Hans-CN.txt)
+- [docker 使用示例](./docs/usage/docker-zh-Hans-CN.md)
 
-```sh
-docker exec -it certbot certbot-toy -h
-```
+- [docker-compose 使用示例](./docs/usage/docker-compose-zh-Hans-CN.md)
 
-e.g. 打印certbot生成的证书。
-
-```sh
-docker exec -it certbot certbot-toy manage -c
-```
-
-e.g. 列出有效的域名，其在user-config.sh文件中定义。
-
-```sh
-docker exec -it certbot certbot-toy manage -l
-```
-
-e.g. 重新创建和更新现有证书。
-
-```sh
-docker exec -it certbot certbot-toy manage -a certonly -d example.com -p aliyun
-```
-
-e.g. 强制更新现有证书。
-
-```sh
-docker exec -it certbot certbot-toy manage -a renew
-```
-
-e.g. 撤销证书。
-
-```sh
-docker exec -it certbot certbot-toy manage -a revoke -d example.com
-```
-
-e.g. 删除证书。
-
-```sh
-docker exec -it certbot certbot-toy manage -a delete -d example.com
-```
 
 ## 关注
 关注同名微博、公众号**续杯君**，获得更多资讯。

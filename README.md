@@ -57,22 +57,13 @@ File: **user-config.sh**
 
 Path: `${your_path}/certbot-toy/scripts/docker/config/user-config.sh`
 
-Descript: Format as valild_domain["CERT_NAME"]="DOMAIN", that means `certbot --cert-name ${CERT_NAME} -d ${DOMAIN}`.
+Descript: Format as valild_domain["CERT_NAME"]="DOMAIN", that means `certbot --cert-name ${CERT_NAME} -d ${DOMAIN}`. The valild_domain is array, you should be defined domains list which is need Certbot certificates.
 
 Parameter  | Feauture
 --      | ----------
- valid_domain   | For example, `valild_domain["example.com"]="*.example.com"`.
+ valid_domain   | For example, `valild_domain["example-a.com"]="*.example-a.com"` `valild_domain["example-b.com"]="*.example-b.com"`.
 
  ---
-
-## Usage
-
-Get more information about this script and learn its command.
-
-```sh
-cd ${your_path}/certbot-toy/
-bash main.sh help
-```
 
 ## Quick Examples
 
@@ -129,51 +120,13 @@ docker exec -it certbot certbot-toy -h
 
 ---
 
-## Congratulations
+## Usage
 
 Have a fun experience with certbot-toy.
 
-e.g. View more [certbot-toy usage](./scripts/docker/docs/help/manage.txt)
+- [docker 使用示例](./docs/usage/docker-en.md)
 
-```sh
-docker exec -it certbot certbot-toy -h
-```
-
-e.g. print the certificates which certbot knows about.
-
-```sh
-docker exec -it certbot certbot-toy manage -c
-```
-
-e.g. Lists of the valid domain which is defined in user-config.sh file.
-
-```sh
-docker exec -it certbot certbot-toy manage -l
-```
-
-e.g. Re-creating and updating existing certificates
-
-```sh
-docker exec -it certbot certbot-toy manage -a certonly -d example.com -p aliyun
-```
-
-e.g. Force-renewal existing certificates
-
-```sh
-docker exec -it certbot certbot-toy manage -a renew
-```
-
-e.g. Revoke certificates
-
-```sh
-docker exec -it certbot certbot-toy manage -a revoke -d example.com
-```
-
-e.g. Delete certificates
-
-```sh
-docker exec -it certbot certbot-toy manage -a delete -d example.com
-```
+- [docker-compose 使用示例](./docs/usage/docker-compose-en.md)
 
 ## Follow me
 Follow my Weibo, WeChat Official Account **续杯君** for more information.
