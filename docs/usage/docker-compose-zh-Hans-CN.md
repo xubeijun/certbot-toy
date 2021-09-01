@@ -19,7 +19,7 @@ e.g. 打印certbot生成的证书。
 docker-compose exec certbot certbot-toy manage -c
 ```
 
-e.g. 列出有效的域名，其在user-config.sh文件中定义。
+e.g. 列出有效的域名配置，其在user-config.sh文件中定义。
 
 ```sh
 #docker-compose
@@ -52,6 +52,17 @@ e.g. 删除证书。
 ```sh
 #docker-compose
 docker-compose exec certbot certbot-toy manage -a delete -d example.com
+```
+
+e.g. 创建、更新、撤销、删除证书并重启nginx。
+```sh
+#docker-compose
+
+#格式
+${your_certbot_command} && docker-compose exec nginx nginx -s reload
+
+#举例说明
+docker-compose exec certbot certbot-toy manage -a certonly -d example.com -p aliyun && docker-compose exec nginx nginx -s reload
 ```
 
 e.g. 每隔15天自动强制更新现有证书，并重启nginx。

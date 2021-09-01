@@ -39,70 +39,18 @@ git clone https://github.com/xubeijun/certbot-toy.git
 
  ---
 
-## 快速开始
+## 快速开始 - 只要3步
 
-请根据您的实际情况选择相应的步骤。
+请根据您的实际情况选择下列中的一种方式。
 
-### 步奏 1 - 初始化第三方dns插件
+- [docker 快速开始](./docs/quick/docker-zh-Hans-CN.md)
 
-该命令将下载依赖并生成第三方插件，当前包含阿里云dns。
-
-不要忘记完成配置`init-config.sh`文件, **我们需要这些环境变量**.
-
-实际上我们已经提供了初始化后生成的第三方go二进制插件，其文件目录位于`${your_path}/certbot-toy/scripts/docker/bin/`， **您可以跳过初始化这一步奏**.
-
-```sh
-bash main.sh init
-```
-
-### 步奏 2 - 生成certbot-toy的docker镜像服务
-
-该命令生成docker镜像服务，这个certbot-toy是集成了第三方dns插件的certbot镜像。
-
-```sh
-bash main.sh build
-```
-
-以下命令帮助您查看当前docker环境下的镜像列表，您将会看到其中一个镜像名称为**certbot-toy**。
-```sh
-docker images
-
-```
-
-### 步奏 3 - 运行certbot-toy镜像的容器服务
-
-该命令运行certbot-toy镜像的容器服务。
-
-不要忘记完成配置`user.env`文件, **我们需要这些环境变量**.
-
-```sh
-bash main.sh run
-```
-
-以下命令帮助您查看当前docker环境下的容器列表，您将会看到其中一个容器名称为**certbot**.
-```sh
-docker container ls -a
-
-```
-
-### 步奏 4 - 执行certbot-toy镜像的容器服务
-
-不要忘记完成配置`user-config.sh`文件, **我们需要这些环境变量**.
-
-恭喜您，至此可以使用certbot-toy容器来高效管理Certbot证书！
-
-执行该命令将获取certbot-toy的用法说明。
-
-```sh
-docker exec -it certbot certbot-toy -h
-```
+- [docker-compose 快速开始](./docs/quick/docker-compose-zh-Hans-CN.md)
 
 ---
 
 
 ## 使用示例
-
-祝您使用certbot-toy时能有一个有趣的体验。
 
 请根据您的实际情况选择使用下列中的一项。
 

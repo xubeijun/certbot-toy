@@ -19,7 +19,7 @@ e.g. print the certificates which certbot knows about.
 docker-compose exec certbot certbot-toy manage -c
 ```
 
-e.g. Lists of the valid domain which is defined in user-config.sh file.
+e.g. Lists of the valid domain config which is defined in user-config.sh file.
 
 ```sh
 #docker-compose
@@ -52,6 +52,17 @@ e.g. Delete certificates
 ```sh
 #docker-compose
 docker-compose exec certbot certbot-toy manage -a delete -d example.com
+```
+
+e.g. Re-creating, Force-renewal, Revoke, Delete certificates and restart nginx。
+```sh
+#docker-compose
+
+#Format
+${your_certbot_command} && docker-compose exec nginx nginx -s reload
+
+#Such as
+docker-compose exec certbot certbot-toy manage -a certonly -d example.com -p aliyun && docker-compose exec nginx nginx -s reload
 ```
 
 e.g. Automatically force-renewal existing certificates every 15 days and nginx is restarted.
