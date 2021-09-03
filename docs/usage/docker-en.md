@@ -1,6 +1,6 @@
 ## Usage - docker
 
-e.g. View more [certbot-toy usage](./scripts/docker/docs/help/manage.txt)
+e.g. View more [certbot-toy usage](../../scripts/docker/docs/help/manage.txt)
 
 ```sh
 #docker

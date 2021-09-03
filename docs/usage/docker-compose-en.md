@@ -5,7 +5,7 @@ First you need to go to the directory where your docker-compose.yml file is loca
 cd ${YOUR_DOCKER_COMPOSE_YML_PATH}
 ```
 
-e.g. View more [certbot-toy usage](./scripts/docker/docs/help/manage.txt)
+e.g. View more [certbot-toy usage](../../scripts/docker/docs/help/manage.txt)
 
 ```sh
 #docker-compose

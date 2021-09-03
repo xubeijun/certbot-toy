@@ -5,7 +5,7 @@
 cd ${YOUR_DOCKER_COMPOSE_YML_PATH}
 ```
 
-e.g. 查看更多 [certbot-toy 用法说明](./scripts/docker/docs/help/manage-zh-Hans-CN.txt)
+e.g. 查看更多 [certbot-toy 用法说明](../../scripts/docker/docs/help/manage-zh-Hans-CN.txt)
 
 ```sh
 #docker-compose

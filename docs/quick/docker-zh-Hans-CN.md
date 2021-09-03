@@ -2,7 +2,7 @@
 
 请根据您的实际情况选择相应的步骤。
 
-假定您已完成[docker 配置](./docs/config/docker-zh-Hans-CN.md)，并且您CD至工作目录中的certbot-toy。
+假定您已完成[docker 配置](../config/docker-zh-Hans-CN.md)，并且您CD至工作目录中的certbot-toy。
 
 ```sh
 cd ${your_path} && cd certbot-toy
@@ -14,18 +14,30 @@ cd ${your_path} && cd certbot-toy
 
 不要忘记完成配置`init-config.sh`文件, **我们需要这些环境变量**.
 
-实际上我们已经提供了初始化后生成的第三方go二进制插件，其文件目录位于`${your_path}/certbot-toy/scripts/docker/bin/`， **您可以跳过初始化这一步奏**.
+- 1.1 实际上我们已经提供了初始化后生成的第三方go二进制插件，其文件目录位于`${your_path}/certbot-toy/scripts/docker/bin/`， **您可以跳过初始化这一步奏**.
 
 ```sh
+#1.1
 bash main.sh init
 ```
 
 ### 步奏 2 - 生成certbot-toy的docker镜像服务 [必选]
 
-该命令生成docker镜像服务，这个certbot-toy是集成了第三方dns插件的certbot镜像。
+请选择**2.1**或者**2.2**中一种方式用于获取certbot-toy镜像。
+
+- 2.1 该命令生成docker镜像服务，这个certbot-toy是集成了第三方dns插件的certbot镜像。
 
 ```sh
+#2.1
 bash main.sh build
+```
+
+- 2.2 该命令拉取hub.docker.com上certbot-toy:latest版本的镜像
+
+```sh
+#2.2
+docker pull xubeijun/certbot-toy
+
 ```
 
 以下命令帮助您查看当前docker环境下的镜像列表，您将会看到其中一个镜像名称为**certbot-toy**。
@@ -36,12 +48,35 @@ docker images
 
 ### 步奏 3 - 运行certbot-toy镜像的容器服务 [必选]
 
+请选择**3.1**或者**3.2**中一种方式用于运行certbot-toy镜像。
+
 该命令运行certbot-toy镜像的容器服务。
 
-不要忘记完成配置`user.env`文件, **我们需要这些环境变量**.
+- 3.1 不要忘记完成配置`user.env`文件, **我们需要这些环境变量**.
 
 ```sh
+#3.1
+#match to 2.1 step `bash main.sh build`
 bash main.sh run
+```
+
+- 3.2 该命令运行hub.docker.com上certbot-toy:latest版本的镜像
+
+```sh
+#3.2
+#match to 2.2 step `docker pull xubeijun/certbot-toy`
+docker run \
+--name certbot \
+-itd \
+-v ${LETSENCRYPT_CONF_DIR}:/etc/letsencrypt \
+-v ${LETSENCRYPT_WORK_DIR}:/var/lib/letsencrypt \
+-v ${LETSENCRYPT_LOG_DIR}:/var/log/letsencrypt \
+-v ${USER_CONFIG_DIR}:/usr/local/opt/certbot-dns/config/ \
+-e ACCESS_KEY_ID=${ACCESS_KEY_ID} \
+-e ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET} \
+-e ENDPOINT=${ENDPOINT} \
+xubeijun/certbot-toy:latest
+
 ```
 
 以下命令帮助您查看当前docker环境下的容器列表，您将会看到其中一个容器名称为**certbot**.

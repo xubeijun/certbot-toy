@@ -80,9 +80,11 @@ ENDPOINT=${YOUR_CLOUDFLARE_ENDPOINT}
 ```
 
 ### docker-compose <span id="yml">yml配置示例</span>
+
+如果您通过步奏2.1获取certbot-toy镜像，则使用以下配置。
 ```sh
 #docker-compose.yml file
-
+#match to 2.1 step `bash main.sh build`
 version: "3.3"
 
 services:
@@ -109,6 +111,57 @@ services:
             env_file:
                     - ./.env
             image: certbot-toy:latest
+            container_name: certbot
+            volumes:
+                    - ${LETSENCRYPT_CONF_DIR}:/etc/letsencrypt/:rw
+                    - ${LETSENCRYPT_WORK_DIR}:/var/lib/letsencrypt/:rw
+                    - ${LETSENCRYPT_LOG_DIR}:/var/log/letsencrypt/:rw
+                    - ${USER_CONFIG_DIR}:${APP_DIR}config/:rw
+            environment:
+                    - ACCESS_KEY_ID=${ACCESS_KEY_ID}
+                    - ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET}
+                    - ENDPOINT=${ENDPOINT}
+            stdin_open:
+                    true
+            tty:
+                    true
+            restart:
+                    always
+networks:
+    lnmp-nginx:
+
+```
+
+如果您通过步奏2.2获取certbot-toy镜像，则使用以下配置。
+```sh
+#docker-compose.yml file
+#match to 2.2 step `docker pull xubeijun/certbot-toy`
+version: "3.3"
+
+services:
+    nginx:
+            env_file:
+                    - ./.env
+            image: nginx:${NGINX_VERSION}-alpine
+            container_name: nginx
+            volumes:
+                    - ${WEB_ROOT_DIR}:/usr/share/nginx/html:rw
+                    - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+                    - ${NGINX_CONF_DIR}:/etc/nginx/conf.d/:ro
+                    - ${NGINX_SSL_CERTS_DIR}:/etc/nginx/certs/:ro
+                    - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+                    - ${LETSENCRYPT_CONF_DIR}:/etc/letsencrypt/:rw
+            networks:
+                    - lnmp-nginx
+            ports:
+                    - "${NGINX_HTTP_HOST_PORT}:80"
+                    - "${NGINX_HTTPS_HOST_PORT}:443"
+            restart:
+                    always
+    certbot:
+            env_file:
+                    - ./.env
+            image: xubeijun/certbot-toy:latest
             container_name: certbot
             volumes:
                     - ${LETSENCRYPT_CONF_DIR}:/etc/letsencrypt/:rw

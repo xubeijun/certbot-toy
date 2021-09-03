@@ -2,8 +2,7 @@ English | [简体中文](README-CN.md)
 
 
 <h1 align="center">certbot-toy</h1>
-The purpose of this program is to generate certbot-toy which is a docker images for managing Certbot certificates.
-Unofficial build of EFF's Certbot with its plugin for doing DNS challenges using aliyun Cloud DNS.
+The purpose of this program is to generate certbot-toy which is a docker images for managing Certbot certificates. Unofficial build of EFF's Certbot with its plugin for doing DNS challenges, it currently supports aliyun Cloud DNS.
 
 ## Requirements
 

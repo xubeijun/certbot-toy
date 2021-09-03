@@ -1,6 +1,6 @@
 ## Quick start - docker-compose
 
-Let's assume that you have completed configuration [docker-compose config](./docs/config/docker-compose-en.md), CD to the workdir and into certbot-toy directory。
+Let's assume that you have completed configuration [docker-compose config](../config/docker-compose-en.md), CD to the workdir and into certbot-toy directory。
 
 ```sh
 cd ${your_path} && cd certbot-toy
@@ -14,18 +14,30 @@ This command is to init third party dns-plugins, it include aliyun Cloud DNS.
 
 Don't forget to complete the configuration `init-config.sh` file, **we need these envionment variables**.
 
-Actually we have offered the go build binary file in the `${your_path}/certbot-toy/scripts/docker/bin/` directory, **you can skip the init step**.
+- 1.1 Actually we have offered the go build binary file in the `${your_path}/certbot-toy/scripts/docker/bin/` directory, **you can skip the init step**.
 
 ```sh
+#1.1
 bash main.sh init
 ```
 
 ### step 2 - build certbot-toy docker image [required]
 
-This command is to build docker images, the certbot-toy is integrated EFF's Certbot with third party dns plugins.
+Please select one of the methods in **2.1** or **2.2** to get the certbot-toy image.
+
+- 2.1 This command is to build docker images, the certbot-toy is integrated EFF's Certbot with third party dns plugins.
 
 ```sh
+#2.1
 bash main.sh build
+```
+
+- 2.2 This command is to pull the "certbot-toy:latest” which is download from hub.docker.com online origin.
+
+```sh
+#2.2
+docker pull xubeijun/certbot-toy
+
 ```
 
 You need to go to the directory where your docker-compose.yml file is located.
@@ -50,9 +62,10 @@ You need to go to the directory where your docker-compose.yml file is located.
 cd ${YOUR_DOCKER_COMPOSE_YML_PATH}
 ```
 
-This command is to run the docker images which is named certbot-toy.
+- 3.1 This command is to run the docker images which is named certbot-toy.
 
 ```sh
+#3.1
 docker-compose up --no-deps -d certbot
 ```
 
