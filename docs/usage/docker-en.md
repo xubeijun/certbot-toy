@@ -66,5 +66,5 @@ e.g. Automatically force-renewal existing certificates every 15 days and nginx i
 
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * docker exec certbot certbot-toy manage -a certonly renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * docker exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```
