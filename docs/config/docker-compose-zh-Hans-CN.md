@@ -110,7 +110,7 @@ services:
     certbot:
             env_file:
                     - ./.env
-            image: certbot-toy:latest
+            image: xubeijun/certbot-toy:latest
             container_name: certbot
             volumes:
                     - ${LETSENCRYPT_CONF_DIR}:/etc/letsencrypt/:rw

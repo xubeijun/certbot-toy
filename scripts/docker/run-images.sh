@@ -15,4 +15,4 @@ docker run \
 -e ACCESS_KEY_ID=${ACCESS_KEY_ID} \
 -e ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET} \
 -e ENDPOINT=${ENDPOINT} \
-certbot-toy:latest
+xubeijun/certbot-toy:latest
