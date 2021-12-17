@@ -6,7 +6,7 @@ source ./config/user-config.sh
 source ./config/sys-config.sh
 
 #证书名称,通用域名,dns插件,命令内容,操作类型
-unset CERT_NAME DOMAIN DNS_PLUGIN SHELL_COMMAND ACTION_TYPE
+unset CERT_NAME WILDCARD_DOMAIN DOMAIN DNS_PLUGIN SHELL_COMMAND ACTION_TYPE
 
 #有效域名列表
 function listValidDomain(){
@@ -21,7 +21,8 @@ function listValidDomain(){
 function validDomain(){
     if [[ ${valid_domain[$1]} ]]
         then
-        DOMAIN=${valid_domain[$1]}
+        WILDCARD_DOMAIN=${valid_domain[$1]}
+        DOMAIN=$(echo $WILDCARD_DOMAIN | grep -E '[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$' -o)
         CERT_NAME=$1
     else
         error "invalidDomain"
@@ -43,11 +44,11 @@ function validPlugin(){
 function actionCommand(){
     case "${ACTION_TYPE}" in
         "certonly")
-            if [[ -z ${CERT_NAME+x} || -z ${DOMAIN+x} || -z ${DNS_PLUGIN+x} ]]
+            if [[ -z ${CERT_NAME+x} || -z ${WILDCARD_DOMAIN+x} || -z ${DNS_PLUGIN+x} ]]
             then
                 error "requireOption"
             fi
-            SHELL_COMMAND="certbot certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos --cert-name ${CERT_NAME} -d ${DOMAIN}  --manual-auth-hook ${APP_DIR}hooks/auth.sh --manual-cleanup-hook ${APP_DIR}hooks/cleanup.sh";;
+            SHELL_COMMAND="certbot certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos --cert-name ${CERT_NAME} -d ${WILDCARD_DOMAIN} -d ${DOMAIN}  --manual-auth-hook ${APP_DIR}hooks/auth.sh --manual-cleanup-hook ${APP_DIR}hooks/cleanup.sh";;
         "renew")
             SHELL_COMMAND="certbot renew";;
         "revoke")
