@@ -57,4 +57,4 @@ Please select the corresponding usage according to your actual situation.
 - [docker-compose usage](./docs/usage/docker-compose-en.md)
 
 ## Follow me
-Follow my Weibo, WeChat Official Account **续杯君** for more information.
+Subscribe my [Weibo](https://weibo.com/xubeijun), WeChat, [Bilibili](https://space.bilibili.com/490987374/), Official Account **续杯君** for more information.
