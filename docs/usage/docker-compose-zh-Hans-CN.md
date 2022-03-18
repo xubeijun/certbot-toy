@@ -71,6 +71,8 @@ e.g. 每隔15天自动强制更新现有证书，并重启nginx。
 
 **注意**，请将下列脚本中的`${YOUR_DOCKER_COMPOSE_YML_PATH}`替换为您的docker-compose.yml文件所在目录。
 
+**注意**，请将下列脚本中的`${DNS_PLUGIN}`替换为您的第三方dns插件名称。它与配置参数`-p aliyun`的值相同。
+
 **注意**，请将下列脚本中的`${BIN_DOCKER_COMPOSE_YML_PATH}`替换为您的docker-compose执行文件所在目录。
 
 ```sh
@@ -81,5 +83,5 @@ which docker-compose
 
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && ${BIN_DOCKER_COMPOSE_YML_PATH} exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && ${BIN_DOCKER_COMPOSE_YML_PATH} exec certbot certbot-toy manage -a renew  -p ${DNS_PLUGIN}  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```
