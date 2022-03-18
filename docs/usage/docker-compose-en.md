@@ -37,21 +37,21 @@ e.g. Force-renewal existing certificates
 
 ```sh
 #docker-compose
-docker-compose exec certbot certbot-toy manage -a renew
+docker-compose exec certbot certbot-toy manage -a renew -p aliyun
 ```
 
 e.g. Revoke certificates
 
 ```sh
 #docker-compose
-docker-compose exec certbot certbot-toy manage -a revoke -d example.com
+docker-compose exec certbot certbot-toy manage -a revoke -d example.com -p aliyun
 ```
 
 e.g. Delete certificates
 
 ```sh
 #docker-compose
-docker-compose exec certbot certbot-toy manage -a delete -d example.com
+docker-compose exec certbot certbot-toy manage -a delete -d example.com -p aliyun
 ```
 
 e.g. Re-creating, Force-renewal, Revoke, Delete certificates and restart nginx。
@@ -71,7 +71,15 @@ e.g. Automatically force-renewal existing certificates every 15 days and nginx i
 
 **notice**, Please replace the `${YOUR_DOCKER_COMPOSE_YML_PATH}` variable in the following script, which one is your docker-compose.yml file path.
 
+**notice**，Please replace the `${BIN_DOCKER_COMPOSE_YML_PATH}` variable in the following script, which one is your docker-compose exec file path.
+
+```sh
+which docker-compose
+# ${BIN_DOCKER_COMPOSE_YML_PATH} 通常输出为
+#/usr/local/bin/docker-compose
+```
+
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && docker-compose exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && ${BIN_DOCKER_COMPOSE_YML_PATH} exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```

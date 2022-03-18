@@ -50,15 +50,19 @@ function actionCommand(){
             fi
             SHELL_COMMAND="certbot certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos --cert-name ${CERT_NAME} -d ${WILDCARD_DOMAIN} -d ${DOMAIN}  --manual-auth-hook ${APP_DIR}hooks/auth.sh --manual-cleanup-hook ${APP_DIR}hooks/cleanup.sh";;
         "renew")
+            if [[ -z ${DNS_PLUGIN+x} ]]
+            then
+                error "requireOption"
+            fi
             SHELL_COMMAND="certbot renew";;
         "revoke")
-            if [[ -z ${CERT_NAME+x} ]]
+            if [[ -z ${CERT_NAME+x} || -z ${DNS_PLUGIN+x} ]]
             then
                 error "requireOption"
             fi
             SHELL_COMMAND="certbot revoke --cert-name ${CERT_NAME}";;
         "delete")
-            if [[ -z ${CERT_NAME+x} ]]
+            if [[ -z ${CERT_NAME+x} || -z ${DNS_PLUGIN+x} ]]
             then
                 error "requireOption"
             fi

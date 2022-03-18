@@ -37,21 +37,21 @@ e.g. 强制更新现有证书。
 
 ```sh
 #docker-compose
-docker-compose exec certbot certbot-toy manage -a renew
+docker-compose exec certbot certbot-toy manage -a renew -p aliyun
 ```
 
 e.g. 撤销证书。
 
 ```sh
 #docker-compose
-docker-compose exec certbot certbot-toy manage -a revoke -d example.com
+docker-compose exec certbot certbot-toy manage -a revoke -d example.com -p aliyun
 ```
 
 e.g. 删除证书。
 
 ```sh
 #docker-compose
-docker-compose exec certbot certbot-toy manage -a delete -d example.com
+docker-compose exec certbot certbot-toy manage -a delete -d example.com -p aliyun
 ```
 
 e.g. 创建、更新、撤销、删除证书并重启nginx。
@@ -71,7 +71,15 @@ e.g. 每隔15天自动强制更新现有证书，并重启nginx。
 
 **注意**，请将下列脚本中的`${YOUR_DOCKER_COMPOSE_YML_PATH}`替换为您的docker-compose.yml文件所在目录。
 
+**注意**，请将下列脚本中的`${BIN_DOCKER_COMPOSE_YML_PATH}`替换为您的docker-compose执行文件所在目录。
+
+```sh
+which docker-compose
+# ${BIN_DOCKER_COMPOSE_YML_PATH} 通常输出为
+#/usr/local/bin/docker-compose
+```
+
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && docker-compose exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && ${BIN_DOCKER_COMPOSE_YML_PATH} exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```

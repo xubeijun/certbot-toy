@@ -32,21 +32,21 @@ e.g. Force-renewal existing certificates
 
 ```sh
 #docker
-docker exec certbot certbot-toy manage -a renew
+docker exec certbot certbot-toy manage -a renew -p aliyun
 ```
 
 e.g. Revoke certificates
 
 ```sh
 #docker
-docker exec certbot certbot-toy manage -a revoke -d example.com
+docker exec certbot certbot-toy manage -a revoke -d example.com -p aliyun
 ```
 
 e.g. Delete certificates
 
 ```sh
 #docker
-docker exec certbot certbot-toy manage -a delete -d example.com
+docker exec certbot certbot-toy manage -a delete -d example.com -p aliyun
 ```
 
 e.g. Re-creating, Force-renewal, Revoke, Delete certificates and restart nginx。
@@ -64,7 +64,15 @@ e.g. Automatically force-renewal existing certificates every 15 days and nginx i
 
 **notice**, Please replace the `${LETSENCRYPT_LOG_DIR}` variable in the following script, which one is the same value defined in the user.env profile.
 
+**notice**，Please replace the `${BIN_DOCKER_PATH}` variable in the following script, which one is your docker exec file path.
+
+```sh
+which docker
+# ${BIN_DOCKER_PATH} 通常输出为
+/usr/bin/docker
+```
+
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * docker exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * ${BIN_DOCKER_PATH} exec certbot certbot-toy manage -a renew  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && ${BIN_DOCKER_PATH} exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```
