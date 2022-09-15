@@ -83,5 +83,5 @@ which docker-compose
 
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && ${BIN_DOCKER_COMPOSE_YML_PATH} exec certbot certbot-toy manage -a renew  -p ${DNS_PLUGIN}  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * cd ${YOUR_DOCKER_COMPOSE_YML_PATH} && ${BIN_DOCKER_COMPOSE_YML_PATH} exec -i -T certbot certbot-toy manage -a renew  -p ${DNS_PLUGIN}  >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && docker-compose exec -i nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```

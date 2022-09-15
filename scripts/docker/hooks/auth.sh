@@ -25,7 +25,7 @@ function callDnsPlugin(){
     if [ $STATUS = "ok" ]; then
         RECORD_ID=$(echo $RES | cut -d ":" -f 2)
         echo $RECORD_ID > /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN
-        sleep ${REFRESH_SLEEP:="25"}
+        sleep ${REFRESH_SLEEP:="60"}
     else
         echo $RES
     fi

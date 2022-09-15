@@ -76,5 +76,5 @@ which docker
 
 ```sh
 #docker
-crontab -l > conf && echo "0 0 */15 * * ${BIN_DOCKER_PATH} exec certbot certbot-toy manage -a renew -p ${DNS_PLUGIN} >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && ${BIN_DOCKER_PATH} exec nginx nginx -s reload" >> conf && crontab conf && rm -f conf
+crontab -l > conf && echo "0 0 */15 * * ${BIN_DOCKER_PATH} exec -i certbot certbot-toy manage -a renew -p ${DNS_PLUGIN} >> ${LETSENCRYPT_LOG_DIR}cron.log 2>&1 && ${BIN_DOCKER_PATH} exec -i nginx nginx -s reload" >> conf && crontab conf && rm -f conf
 ```
