@@ -29,6 +29,7 @@ Parameter  | Feauture
  ACCESS_KEY_ID   | it is the Cloudflare api key id and used in your third part dns plugin sdk and get it from your clound service.
  ACCESS_KEY_SECRET   | it is the Cloudflare api key secret and used in your third part dns plugin sdk and get it from your clound service.
  ENDPOINT   | it is the Cloudflare zone id and used in your third part dns plugin sdk and get it from your clound service.
+ LETSENCRYPT_USER_EMAIL   | it is user email and used for registration and recovery contact.
 
 ---
 

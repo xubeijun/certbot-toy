@@ -30,6 +30,7 @@ Parameter  | Feauture
  ACCESS_KEY_ID   | it is the Cloudflare api key id and used in your third part dns plugin sdk and get it from your clound service.
  ACCESS_KEY_SECRET   | it is the Cloudflare api key secret and used in your third part dns plugin sdk and get it from your clound service.
  ENDPOINT   | it is the Cloudflare zone id and used in your third part dns plugin sdk and get it from your clound service.
+ LETSENCRYPT_USER_EMAIL   | it is user email and used for registration and recovery contact.
 
 ---
 
@@ -77,6 +78,7 @@ LETSENCRYPT_LOG_DIR=/${YOUR_DOCKER_COMPOSE_WORKDIR}/log/letsencrypt/
 ACCESS_KEY_ID=${YOUR_CLOUDFLARE_ACCESS_KEY_ID}
 ACCESS_KEY_SECRET=${YOUR_CLOUDFLARE_ACCESS_KEY_SECRET}
 ENDPOINT=${YOUR_CLOUDFLARE_ENDPOINT}
+LETSENCRYPT_USER_EMAIL=${YOUR_EMAIL}
 ```
 
 ### docker-compose <span id="yml">yml config usage</span>
@@ -122,6 +124,7 @@ services:
                     - ACCESS_KEY_ID=${ACCESS_KEY_ID}
                     - ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET}
                     - ENDPOINT=${ENDPOINT}
+                    - LETSENCRYPT_USER_EMAIL=${LETSENCRYPT_USER_EMAIL}
             stdin_open:
                     true
             tty:
@@ -173,6 +176,7 @@ services:
                     - ACCESS_KEY_ID=${ACCESS_KEY_ID}
                     - ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET}
                     - ENDPOINT=${ENDPOINT}
+                    - LETSENCRYPT_USER_EMAIL=${LETSENCRYPT_USER_EMAIL}
             stdin_open:
                     true
             tty:

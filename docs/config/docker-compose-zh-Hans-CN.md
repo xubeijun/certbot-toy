@@ -30,6 +30,7 @@
  ACCESS_KEY_ID   | 用户标识，将用于您的云服务商dns接口调用，通过您的云服务商自助服务获取。
  ACCESS_KEY_SECRET   | 用户密钥，将用于您的云服务商dns接口调用，通过您的云服务商自助服务获取。
  ENDPOINT   | API服务端地址，也称Zone ID，将用于您的云服务商dns接口调用，通过您的云服务商自助服务获取。
+ LETSENCRYPT_USER_EMAIL   | 用户邮箱，用于注册和通知证书信息变更的邮件地址。
 
 ---
 
@@ -77,6 +78,7 @@ LETSENCRYPT_LOG_DIR=/${YOUR_DOCKER_COMPOSE_WORKDIR}/log/letsencrypt/
 ACCESS_KEY_ID=${YOUR_CLOUDFLARE_ACCESS_KEY_ID}
 ACCESS_KEY_SECRET=${YOUR_CLOUDFLARE_ACCESS_KEY_SECRET}
 ENDPOINT=${YOUR_CLOUDFLARE_ENDPOINT}
+LETSENCRYPT_USER_EMAIL=${YOUR_EMAIL}
 ```
 
 ### docker-compose <span id="yml">yml配置示例</span>
@@ -121,6 +123,7 @@ services:
                     - ACCESS_KEY_ID=${ACCESS_KEY_ID}
                     - ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET}
                     - ENDPOINT=${ENDPOINT}
+                    - LETSENCRYPT_USER_EMAIL=${LETSENCRYPT_USER_EMAIL}
             stdin_open:
                     true
             tty:
@@ -172,6 +175,7 @@ services:
                     - ACCESS_KEY_ID=${ACCESS_KEY_ID}
                     - ACCESS_KEY_SECRET=${ACCESS_KEY_SECRET}
                     - ENDPOINT=${ENDPOINT}
+                    - LETSENCRYPT_USER_EMAIL=${LETSENCRYPT_USER_EMAIL}
             stdin_open:
                     true
             tty:
