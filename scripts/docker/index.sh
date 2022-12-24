@@ -48,7 +48,7 @@ function actionCommand(){
             then
                 error "requireOption"
             fi
-            SHELL_COMMAND="certbot certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos --cert-name ${CERT_NAME} -d ${WILDCARD_DOMAIN} -d ${DOMAIN} -m ${LETSENCRYPT_USER_EMAIL}  --manual-auth-hook ${APP_DIR}hooks/auth.sh --manual-cleanup-hook ${APP_DIR}hooks/cleanup.sh";;
+            SHELL_COMMAND="certbot certonly --manual --preferred-challenges dns --server https://acme-v02.api.letsencrypt.org/directory --non-interactive --agree-tos --cert-name ${CERT_NAME} -d ${WILDCARD_DOMAIN} -d ${DOMAIN} -m ${LETSENCRYPT_USER_EMAIL}  --manual-auth-hook ${APP_DIR}hooks/auth.sh --manual-cleanup-hook ${APP_DIR}hooks/cleanup.sh";;
         "renew")
             if [[ -z ${DNS_PLUGIN+x} ]]
             then
