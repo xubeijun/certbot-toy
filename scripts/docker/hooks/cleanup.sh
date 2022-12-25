@@ -7,9 +7,7 @@ if [[ -z ${ACCESS_KEY_ID+x} || -z ${ACCESS_KEY_SECRET+x} || -z ${ENDPOINT+x} ]]
     error "requireDnsParams"
 fi
 
-if [ -f /tmp/DNS_PLUGIN ]; then
-    DNS_PLUGIN=$(cat /tmp/DNS_PLUGIN)
-else
+if [ -z $DNS_PLUGIN ]; then
     error "requireDnsPlugin"
 fi
 

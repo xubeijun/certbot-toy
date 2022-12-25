@@ -34,7 +34,7 @@ function validPlugin(){
     if [[ ${valid_dns_plugins[@]} =~ $1 ]]
         then
         DNS_PLUGIN="$1"
-        echo $DNS_PLUGIN > /tmp/DNS_PLUGIN
+        export DNS_PLUGIN
     else
         error "invalidDns"
     fi

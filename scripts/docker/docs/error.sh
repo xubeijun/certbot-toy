@@ -10,7 +10,7 @@ error["invalidParams"]='Invalid params!'
 error["invalidDns"]='Invalid dns!'
 error["requireDnsParams"]='Require config dns params! Such as ACCESS_KEY_ID,ACCESS_KEY_SECRET,ENDPOINT. The config params is in the ./certbot-toy/scripts/docker/config/user.env file.'
 error["requireDnsRecordId"]='Require dns RECORD_ID which is recode in /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN file.'
-error["requireDnsPlugin"]='Require dns DNS_PLUGIN which is recode in /tmp/DNS_PLUGIN file.'
+error["requireDnsPlugin"]='Require dns Plugin! Please set third part dns plugin variable `-p`.'
 
 
 # 显示错误信息
