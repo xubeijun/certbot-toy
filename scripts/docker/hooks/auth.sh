@@ -20,9 +20,13 @@ function callDnsPlugin(){
     RES=$(${APP_DIR}bin/${DNS_PLUGIN}-dns -action create -endpoint $ENDPOINT -accessKeyId $ACCESS_KEY_ID -accessKeySecret $ACCESS_KEY_SECRET -domainName $DOMAIN -rr $RR -value $CERTBOT_VALIDATION)
     STATUS=$(echo $RES | cut -d ":" -f 1)
 
+    if [ ! -d /tmp/CERTBOT_$CERTBOT_DOMAIN ];then
+        mkdir -m 0777 /tmp/CERTBOT_$CERTBOT_DOMAIN
+    fi
+
     if [ $STATUS = "ok" ]; then
         RECORD_ID=$(echo $RES | cut -d ":" -f 2)
-        echo $RECORD_ID > /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN
+        echo $RECORD_ID > /tmp/CERTBOT_$CERTBOT_DOMAIN/RECORD_ID
         sleep ${REFRESH_SLEEP:="60"}
     else
         echo $RES

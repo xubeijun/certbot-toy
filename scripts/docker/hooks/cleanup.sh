@@ -13,8 +13,9 @@ fi
 
 # 调用DNS插件
 function callDnsPlugin(){
-    if [ -f /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN ]; then
-        RECORD_ID=$(cat /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN)
+    if [ -f /tmp/CERTBOT_$CERTBOT_DOMAIN/RECORD_ID ]; then
+        RECORD_ID=$(cat /tmp/CERTBOT_$CERTBOT_DOMAIN/RECORD_ID)
+        rm -f /tmp/CERTBOT_$CERTBOT_DOMAIN/RECORD_ID
     else
         error "requireDnsRecordId"
     fi
@@ -23,8 +24,7 @@ function callDnsPlugin(){
     STATUS=$(echo $RES | cut -d ":" -f 1)
 
     if [ $STATUS = "ok" ]; then
-        rm -f /tmp/DNS_RECORD_ID_$CERTBOT_DOMAIN
-        rm -f /tmp/DNS_PLUGIN
+        echo $STATUS
     else
         echo $RES
     fi
