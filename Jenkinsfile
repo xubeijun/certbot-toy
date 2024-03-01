@@ -9,8 +9,8 @@ pipeline {
         }
         stage('build project') {
             steps {
-                sh '''echo "开始构建"
-echo "构建完成"'''
+                sh '''echo "开始构建."
+echo "构建完成."'''
             }
         }
         stage('deploy project') {
