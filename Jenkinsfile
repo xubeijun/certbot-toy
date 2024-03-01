@@ -15,7 +15,7 @@ echo "构建完成."'''
         }
         stage('deploy project') {
             steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: '192.168.0.100', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'echo "Jenkins pipelien success"', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'pipeline-test', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'scripts/**')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: '${remote_host_name}', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'echo "Jenkins pipelien success"', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'pipeline-test', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'scripts/**')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
